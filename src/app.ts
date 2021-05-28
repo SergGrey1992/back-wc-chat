@@ -6,6 +6,11 @@ const app = express();
 const server = http.createServer(app);
 // @ts-ignore
 const socket = socketio(server);
+
+app.get('/', (req, res) => {
+	res.send('Hello, server')
+})
+
 const messages = [
 	{message: 'Hello Serg', id: 'qweqwe', user: {id: 'qweqew', name: 'Dimych'}},
 	{message: 'Hello Dima', id: 'qweqwe1', user: {id: 'qweqew1', name: 'Sergey'}},
