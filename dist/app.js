@@ -6,10 +6,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
 var http_1 = __importDefault(require("http"));
 var socket_io_1 = __importDefault(require("socket.io"));
+var cors_1 = __importDefault(require("cors"));
 var app = express_1.default();
 var server = http_1.default.createServer(app);
 // @ts-ignore
 var socket = socket_io_1.default(server);
+app.use(cors_1.default());
+app.get('/', function (req, res) {
+    res.send('Hello, server');
+});
 var messages = [
     { message: 'Hello Serg', id: 'qweqwe', user: { id: 'qweqew', name: 'Dimych' } },
     { message: 'Hello Dima', id: 'qweqwe1', user: { id: 'qweqew1', name: 'Sergey' } },

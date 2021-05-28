@@ -1,12 +1,13 @@
 import express from 'express'
 import http from 'http'
 import socketio from 'socket.io'
+import cors from 'cors';
 
 const app = express();
 const server = http.createServer(app);
 // @ts-ignore
 const socket = socketio(server);
-
+app.use(cors());
 app.get('/', (req, res) => {
 	res.send('Hello, server')
 })
