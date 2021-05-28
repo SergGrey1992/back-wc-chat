@@ -1,14 +1,28 @@
 import express from 'express'
 import http from 'http'
 import socketio from 'socket.io'
-import cors from 'cors';
+
+
+let cors = (req,res) => {
+	res.setHeader('Access-Control-Allow-Origin', '*');
+	res.setHeader('Access-Control-Request-Method', '*');
+	res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
+	res.setHeader('Access-Control-Allow-Headers', '*');
+	if (req.metnod === 'OPTIONS') {
+		res.writeHead(200);
+		res.end();
+		return true
+	}
+	return false
+}
 
 const app = express();
 const server = http.createServer(app);
 // @ts-ignore
 const socket = socketio(server);
-app.use(cors());
+
 app.get('/', (req, res) => {
+	if( cors(req, res) ) return;
 	res.send('Hello, server')
 })
 
